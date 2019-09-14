@@ -1,0 +1,26 @@
+language: nix
+before_install:
+- sudo mkdir -p /etc/nix
+- echo "substituters = https://cache.nixos.org/ https://datakurre.cachix.org/" | sudo
+  tee -a /etc/nix/nix.conf
+- echo "trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+  datakurre.cachix.org-1:ayZJTy5BDd8K4PW9uc9LHV+WCsdi/fu1ETIYZMooK78=" | sudo tee
+  -a /etc/nix/nix.conf
+script: nix-build
+after_success:
+- mkdir build
+- mv result build/index.png
+- echo '<meta http-equiv="refresh" content= "0;url=index.png" />' > build/index.html
+- touch build/.nojekyll
+deploy:
+  provider: pages
+  github-token: "$GITHUB_TOKEN"
+  local-dir: "./build"
+  target-branch: gh-pages
+  keep-history: false
+  skip-cleanup: true
+  on:
+    branch: master
+env:
+  global:
+    secure: tLNTNvX0TvM8P1aPCWlZDHMLIPHxW2UMWgnmKuk92qmhEmLlwiqQZIr3jmcPojg83iIgzI7DsRGBZd+6KrhDpPfP53pzxdbdNm1/qZLVaT5CWLO/9ig8DWIGHfE7Hq3KAgBORVRJIURY2rg5HLr5cQF7og61dt3o/HICbES5FmG9PVPb5lEg1OjKMApX/U+jJAMnmFgD+/6KKkyIwlUxh+12aOJP2kHxuXMR5FF2fRROCU9KZ+mquczPx4/mbU/g7dH6LgqXcEg99Hg1UFdJFyZux2hAeBquIMhVUR61fSHdAOvVfYLyr9byfRXmMjy47BfPANYQL4BJopnLGnj2zLFkWFNHPn3eROh2jBobmoNxJlGBrTcAkQTXyY7JorwlXlPBMoZfJJElWfu6sVs7E3mnKqJr/wkjeIgXERSAA60E7bONcJ8LfPzw5OZLBHXsdrbNL9eUZad8kNEY5aWsLQaOc8FCkppMZn+0XC4nrP6WZh7GypQjBEtSHbAzN3j8RVYaAIrYk/JrU1UHtbIkax8e7jq3w1peTuFeDte3lM8eQwJe2uL/ih+/TUuoleARd0/7V64iFul8x28LuvCRV8X+nK+a2DZOd2S15vTn7Db3qZukUUJ85VhzXt1PKl6iQeuwUIdArjBug+VqLqbxWCXZald6umWm8mbdKmVGprg=
