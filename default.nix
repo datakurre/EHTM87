@@ -147,8 +147,8 @@ let
     '';
   };
 
-  "EHTC_FirstM87Results_Apr2019.png" = stdenv.mkDerivation {
-    name = "EHTC_FirstM87Results_Apr2019.png";
+  "EHTC_FirstM87Results_Apr2019_final" = stdenv.mkDerivation {
+    name = "EHTC_FirstM87Results_Apr2019_final.png";
     src = builtins.fetchurl {
       url = "https://de.cyverse.org/anon-files/iplant/home/shared/commons_repo/curated/EHTC_FirstM87Results_Apr2019/EHTC_FirstM87Results_Apr2019_uvfits.tgz";
       sha256 = "0qyl3q7h1c0r0gclxikmcivbbld39g9lwhngbmi75xqc9kz7fvzk";
@@ -170,4 +170,4 @@ let
     '';
   };
 
-in "EHTC_FirstM87Results_Apr2019.png"
+in EHTC_FirstM87Results_Apr2019_final
