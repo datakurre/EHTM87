@@ -165,8 +165,7 @@ let
     ];
     shellHook = ''
       tar xzvf $src
-      eht-imaging_pipeline.py -i EHTC_FirstM87Results_Apr2019/uvfits/SR1_M87_2017_101_lo_hops_netcal_StokesI.uvfits -o final.fits
-      convert final.fits final.png
+      eht-imaging_pipeline.py -i EHTC_FirstM87Results_Apr2019/uvfits/SR1_M87_2017_101_lo_hops_netcal_StokesI.uvfits
     '';
   };
 
