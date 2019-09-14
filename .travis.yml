@@ -9,7 +9,7 @@ before_install:
 script: nix-build
 after_success:
 - mkdir build
-- mv result build/index.png
+- cp result build/index.png
 - echo '<meta http-equiv="refresh" content= "0;url=index.png" />' > build/index.html
 - touch build/.nojekyll
 deploy:

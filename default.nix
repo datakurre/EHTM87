@@ -147,7 +147,7 @@ let
     '';
   };
 
-  EHTC_FirstM87Results_Apr2019-png = stdenv.mkDerivation {
+  "EHTC_FirstM87Results_Apr2019.png" = stdenv.mkDerivation {
     name = "EHTC_FirstM87Results_Apr2019.png";
     src = builtins.fetchurl {
       url = "https://de.cyverse.org/anon-files/iplant/home/shared/commons_repo/curated/EHTC_FirstM87Results_Apr2019/EHTC_FirstM87Results_Apr2019_uvfits.tgz";
@@ -170,4 +170,4 @@ let
     '';
   };
 
-in EHTC_FirstM87Results_Apr2019-png
+in "EHTC_FirstM87Results_Apr2019.png"
