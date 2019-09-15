@@ -43,6 +43,36 @@ let
     doCheck = false;
   };
 
+  pluggy_ = with python.pkgs; pluggy.overridePythonAttrs(old: rec {
+    pname = "pluggy";
+    version = "0.7.1";
+    src = fetchPypi {
+      inherit pname version;
+      sha256 = "95eb8364a4708392bae89035f45341871286a333f749c3141c20573d2b3876e1";
+    };
+    doCheck = false;
+  });
+
+  pytest_ = with python.pkgs; pytest_3.overridePythonAttrs(old: rec {
+    pname = "pytest";
+    version = "3.6.4";
+    src = fetchPypi {
+      inherit pname version;
+      sha256 = "0h85kzdi5pfkz9v0z8xyrsj1rvnmyyjpng7cran28jmnc41w27il";
+    };
+    propagatedBuildInputs = [
+      attrs
+      funcsigs
+      py
+      setuptools
+      six
+      pluggy_
+      more-itertools
+      atomicwrites
+    ];
+    doCheck = false;
+  });
+
   astropy = with python.pkgs; buildPythonPackage rec {
     pname = "astropy";
     version = "2.0.14";
@@ -58,33 +88,7 @@ let
     '';
     propagatedBuildInputs = [
       numpy
-      (pytest_3.overridePythonAttrs(old: rec {
-        pname = "pytest";
-        version = "3.6.4";
-        src = fetchPypi {
-          inherit pname version;
-          sha256 = "0h85kzdi5pfkz9v0z8xyrsj1rvnmyyjpng7cran28jmnc41w27il";
-        };
-        propagatedBuildInputs = [
-          attrs
-          funcsigs
-          py
-          setuptools
-          six
-          (pluggy.overridePythonAttrs(old: rec {
-            pname = "pluggy";
-            version = "0.7.1";
-            src = fetchPypi {
-              inherit pname version;
-              sha256 = "95eb8364a4708392bae89035f45341871286a333f749c3141c20573d2b3876e1";
-            };
-            doCheck = false;
-          }))
-          more-itertools
-          atomicwrites
-        ];
-        doCheck = false;
-      }))
+      pytest_
     ];
     doCheck = false;
   };
